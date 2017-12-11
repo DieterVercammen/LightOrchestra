@@ -1,69 +1,74 @@
-# Hello World PhoneGap Template [![bitHound Score][bithound-img]][bithound-url]
+# Cordova Bluetooth Terminal
 
-A PhoneGap Hello World template
+[![dependencies Status](https://david-dm.org/1oginov/Cordova-Bluetooth-Terminal/status.svg)](https://david-dm.org/1oginov/Cordova-Bluetooth-Terminal)
 
-## Usage
+Simple app for communication with devices via bluetooth based on Apache Cordova (PhoneGap). It was made to fetch data
+from one of IoT (Internet of Things) device, so it's source code can be helpful as a base for your own project.
 
-#### PhoneGap CLI
+![Paired devices screenshot](https://raw.githubusercontent.com/1oginov/Cordova-Bluetooth-Terminal/master/misc/Paired-devices-screenshot.png)
+![Terminal screenshot](https://raw.githubusercontent.com/1oginov/Cordova-Bluetooth-Terminal/master/misc/Terminal-screenshot.png)
 
-The hello-world template is the default when you create a new application using the [phonegap-cli][phonegap-cli-url].
+## Quick Start
 
-    phonegap create my-app
+Make sure you have [cordova-cli](https://cordova.apache.org/) installed globally, install with the help of
+[npm](https://www.npmjs.com/) otherwise:
 
-Create an app using this template specifically:
+```sh
+$ npm install -g cordova
+```
 
-    phonegap create my-app --template hello-world
+Clone repository, jump into, pull platforms (only **android** by default) and plugins: 
 
-To see a list of other available PhoneGap templates:
+```sh
+$ git clone https://github.com/1oginov/Cordova-Bluetooth-Terminal.git
+$ cd Cordova-Bluetooth-Terminal
+$ cordova prepare
+```
 
-    phonegap template list
+Also, you can check Cordova requirements (optional or is something failed):
 
-## [config.xml][config-xml]
+```sh
+$ cordova requirements
+```
 
-#### android-minSdkVersion (Android only)
+Build:
 
-Minimum SDK version supported on the target device. Maximum version is blank by default.
+```sh
+$ cordova build
+```
 
-This template sets the minimum to `14`.
+Or run on connected Android device via USB:
 
-    <preference name="android-minSdkVersion" value="14" />
+```sh
+$ cordova run
+```
 
-#### &lt;access ...&gt; (All)
+Emulator is useless here, because you need working bluetooth module.
 
-This template defaults to wide open access.
+## Used
+* [BluetoothSerial](https://github.com/don/BluetoothSerial/) Cordova plugin
+* [jQuery 3.1.1](https://jquery.com/)
+* [Reset CSS](http://meyerweb.com/eric/tools/css/reset/)
 
-    <access origin="*" />
+## Tests
 
-It is strongly encouraged that you restrict access to external resources in your application before releasing to production.
+### Android APK
 
-For more information on whitelist configuration, see the [Cordova Whitelist Guide][cordova-whitelist-guide] and the [Cordova Whitelist Plugin documentation][cordova-plugin-whitelist]
+You can try android build from [here](https://github.com/1oginov/Cordova-Bluetooth-Terminal/blob/master/misc/android-build/android-debug.apk)
+without installing anything.
 
-## [www/index.html][index-html]
+### With Arduino Uno
 
-#### Content Security Policy (CSP)
+#### Requirements
+* Smartphone (tablet, etc)
+* Arduino Uno
+* Bluetooth module (HC-05 for example)
+* PC
 
-The default CSP is similarly open:
+Use [`/misc/arduino-uno-bridge/arduino-uno-bridge.ino`](https://github.com/1oginov/Cordova-Bluetooth-Terminal/blob/master/misc/arduino-uno-bridge/arduino-uno-bridge.ino)
+script to make serial bridge between PC and device connected to Arduino Uno via bluetooth. Wire bluetooth module to
+Arduino Uno as mentioned there, upload script, open Serial Monitor on PC and pair smartphone with BT module.
 
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
-
-Much like the access tag above, you are strongly encouraged to use a more restrictive CSP in production.
-
-A good starting point declaration might be:
-
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" />
-
-For more information on the Content Security Policy, see the [section on CSP in the Cordova Whitelist Plugin documentation][cordova-plugin-whitelist-csp].
-
-Another good resource for generating a good CSP declaration is [CSP is Awesome][csp-is-awesome]
-
-
-[phonegap-cli-url]: http://github.com/phonegap/phonegap-cli
-[cordova-app]: http://github.com/apache/cordova-app-hello-world
-[bithound-img]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world/badges/score.svg
-[bithound-url]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world
-[config-xml]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/config.xml
-[index-html]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/www/index.html
-[cordova-whitelist-guide]: https://cordova.apache.org/docs/en/dev/guide/appdev/whitelist/index.html
-[cordova-plugin-whitelist]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist
-[cordova-plugin-whitelist-csp]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist#content-security-policy
-[csp-is-awesome]: http://cspisawesome.com
+Open Terminal app, select paired device, connect to it and now whatever you send in Serial Monitor on PC will appear in
+app and vice versa. Because of using SoftwareSerial this script is not reliable at all, some symbols can be skipped,
+etc. So... buy Mega! Or STM32.

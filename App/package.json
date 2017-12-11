@@ -1,0 +1,69 @@
+{
+  "name": "cordova-bluetooth-terminal",
+  "version": "1.1.1",
+  "displayName": "Cordova Bluetooth Terminal",
+  "description": "Simple app for communication with devices via bluetooth",
+  "keywords": [
+    "cordova",
+    "bluetooth",
+    "terminal",
+    "serial"
+  ],
+  "homepage": "https://github.com/1oginov/Cordova-Bluetooth-Terminal",
+  "bugs": "https://github.com/1oginov/Cordova-Bluetooth-Terminal/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1oginov/Cordova-Bluetooth-Terminal.git"
+  },
+  "license": "MIT",
+  "author": "Danila Loginov <danila@loginov.rocks> (https://loginov.rocks)",
+  "cordova": {
+    "platforms": [],
+    "plugins": {
+      "cordova-plugin-bluetooth-serial": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-device-motion": {},
+      "cordova-plugin-device-orientation": {},
+      "cordova-plugin-battery-status": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-media-capture": {},
+      "cordova-plugin-console": {},
+      "cordova-plugin-contacts": {},
+      "cordova-plugin-dialogs": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {},
+      "cordova-plugin-geolocation": {},
+      "cordova-plugin-globalization": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-media": {},
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-vibration": {}
+    }
+  },
+  "dependencies": {
+    "cordova-plugin-battery-status": "^1.1.2",
+    "cordova-plugin-bluetooth-serial": "^0.4.7",
+    "cordova-plugin-camera": "^2.1.1",
+    "cordova-plugin-console": "^1.0.7",
+    "cordova-plugin-contacts": "^2.0.1",
+    "cordova-plugin-device": "^1.1.7",
+    "cordova-plugin-device-motion": "~1.2.0",
+    "cordova-plugin-device-orientation": "^1.0.7",
+    "cordova-plugin-dialogs": "^1.2.1",
+    "cordova-plugin-file": "^4.3.3",
+    "cordova-plugin-file-transfer": "^1.5.1",
+    "cordova-plugin-geolocation": "^2.1.0",
+    "cordova-plugin-globalization": "^1.0.8",
+    "cordova-plugin-inappbrowser": "^1.3.0",
+    "cordova-plugin-media": "^2.2.0",
+    "cordova-plugin-media-capture": "^1.2.0",
+    "cordova-plugin-network-information": "^1.2.1",
+    "cordova-plugin-splashscreen": "^3.2.2",
+    "cordova-plugin-statusbar": "^2.1.3",
+    "cordova-plugin-vibration": "^2.1.6",
+    "cordova-plugin-whitelist": "^1.3.2"
+  }
+}

@@ -35,6 +35,8 @@ Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 
 int pos = 0;    // variable to store the servo position
+int value = 0;    // variable to hold the analog value
+
 
 void setup() {
     Serial.begin(9600);
@@ -56,13 +58,19 @@ void loop() {
    // delay(0);                       // waits 15ms for the servo to reach the position
   //}
   //myservo.write(100);
+  value = SerialBT.read() ;
+  delay(200);
+  Serial.println((value*18));
+      
+      myservo.write((value*18));
 
    if (SerialBT.available()) {
-    
+      //value = SerialBT.read() ;
       
+      //Serial.println(value); // lees waarden van gsm naar serial monitor
         if(SerialBT.read()){
-           myservo.write(180);
-           Serial.write(SerialBT.read());
+          // myservo.write(180);
+           
         }
 
         //Serial.write(SerialBT.read());
@@ -72,7 +80,7 @@ void loop() {
     if (Serial.available()) {
         
         SerialBT.write(Serial.read());
-        myservo.write(Serial.read());
+        myservo.write(20);
         Serial.write(Serial.read());
         Serial.write(SerialBT.read());
     }

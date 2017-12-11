@@ -1,0 +1,39 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-bluetooth-serial": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-device-orientation": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    }
+  },
+  "dependent_plugins": {}
+}
