@@ -13,18 +13,23 @@
  * TX  - 2
  * GND - GND
  */
+ /*
+  * Yellow - xxx
+  * Red - 5V
+  * Brown - GDN
+  */
 
 #define PC_BAUDRATE 115200
 #define BLUETOOTH_BAUDRATE 38400
 
 
 #include <SoftwareSerial.h>
-
-SoftwareSerial SerialBT(2, 3); // RX, TX
-char data = 0; 
 #include <Wire.h>
 #include <UnoWiFiDevEd.h>
 #include <Servo.h>
+
+SoftwareSerial SerialBT(2, 3); // RX, TX
+char data = 0; 
 
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
@@ -32,13 +37,15 @@ Servo myservo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
 
 void setup() {
-    Serial.begin(PC_BAUDRATE);
-    SerialBT.begin(BLUETOOTH_BAUDRATE);
+    Serial.begin(9600);
+    SerialBT.begin(19200);
    pinMode(13,OUTPUT);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+  myservo.write(20);
 }
 
 void loop() {
+  
   // for (pos = 0; pos <= 90; pos += 1) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
    // myservo.write(pos);              // tell servo to go to position in variable 'pos'
@@ -50,22 +57,24 @@ void loop() {
   //}
   //myservo.write(100);
 
-  if (SerialBT.available()) {
-
-      Serial.print("Available");
-      data = SerialBT.read();        //Read the incoming data & store into data
-      Serial.print(SerialBT.read());  
+   if (SerialBT.available()) {
+    
       
+        if(SerialBT.read()){
+           myservo.write(180);
+           Serial.write(SerialBT.read());
+        }
+
         //Serial.write(SerialBT.read());
-        //digitalWrite(LED_PIN, LOW);
+        
     }
 
     if (Serial.available()) {
-        //digitalWrite(LED_PIN, HIGH);
         
         SerialBT.write(Serial.read());
-        //Serial.println("Dieter");
-        //digitalWrite(LED_PIN, LOW);
+        myservo.write(Serial.read());
+        Serial.write(Serial.read());
+        Serial.write(SerialBT.read());
     }
 
   
