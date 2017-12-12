@@ -34,6 +34,7 @@ var app = {
         $('#paired-devices form').submit(app.selectDevice);
         $('#toggle-connection').click(app.toggleConnection);
         $('#clear-data').click(app.clearData);
+        
         $('#terminal form').submit(app.sendData);
         $('#startAcc').click(app.startWatch());
 
@@ -142,17 +143,36 @@ var app = {
 
     sendData: function (event) {
         event.preventDefault();
+        //alert($('#terminal form').submit());
+        setInterval(function(){
 
-        var $input = $('#terminal form input[name=data]');
+       
+
+        //var $input = $('#terminal form input[name=data]');
         //var data = $input.val();
         //$input.val('');
-        var data = X;
-        //data += '\n';
+
+        
+
+        // if( X < 0){
+        //     X = (X * (-1));
+        //    var data = X;
+        // } else {
+        //     X = (X  + 1);
+        //    var data = X;
+        // }
+       
+        
+        var data = Math.abs(X);
+
+        
+        data += '\n';
        
 
         app.displayInTerminal(data, false);
 
         bluetoothSerial.write(data, null, app.showError);
+    },500);
     },
 
     displayInTerminal: function (data, isIncoming) {
@@ -182,7 +202,7 @@ var app = {
     },
 
     showError: function (error) {
-        alert(error);
+        //alert(error);
     },
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -206,15 +226,17 @@ var app = {
     
       accelerometerSucces: function(acceleration) {
         var element = document.getElementById('accelerometerDiv');
-       
+        
     
         accelerationX = acceleration.x;
         accelerationY = acceleration.y;
         accelerationZ = acceleration.z;
-        X = accelerationX.toFixed(1);
-        document.getElementById("x").innerHTML = accelerationX.toFixed(1);
-        document.getElementById("y").innerHTML = accelerationY.toFixed(1);
-        document.getElementById("z").innerHTML = accelerationZ.toFixed(1);
+        var accX = accelerationX.toFixed(0);
+        X = accelerationX.toFixed(0);
+        
+        document.getElementById("x").innerHTML = accelerationX.toFixed(0);
+        document.getElementById("y").innerHTML = X;
+        document.getElementById("z").innerHTML = accX;
 
         bluetoothSerial.connect(address, app.deviceConnected, function (error) {
             $('#selected-device .status').text('Disconnected');

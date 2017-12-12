@@ -30,7 +30,8 @@
 
 SoftwareSerial SerialBT(2, 3); // RX, TX
 char data = 0; 
-
+String Data = "";
+int Number;
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 
@@ -68,17 +69,13 @@ Serial.println("Finished!");
 
    pinMode(13,OUTPUT);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
-  myservo.write(20);
+ 
 }
 
 
 // Function to pass BlueTooth output through to serial port output
 void waitForResponse() {
-delay(1000);
-while (SerialBT.available()) {
-Serial.write(SerialBT.read());
-}
-Serial.write("\n");
+
 }
 
 
@@ -87,51 +84,79 @@ Serial.write("\n");
 
 void loop() {
   
-  // for (pos = 0; pos <= 90; pos += 1) { // goes from 0 degrees to 180 degrees
-    // in steps of 1 degree
-   // myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    //delay(0 );                       // waits 15ms for the servo to reach the position
-  //}
-  //for (pos = 90; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-  //  myservo.write(pos);              // tell servo to go to position in variable 'pos'
-   // delay(0);                       // waits 15ms for the servo to reach the position
-  //}
-  //myservo.write(100);
-  value = SerialBT.read() ;
-  delay(200);
+
+  /*value = SerialBT.read() ;
+  delay(100);
+  Serial.write(value);
   //Serial.println((value*18));
       
       //myservo.write((value*18));
 
       while (SerialBT.available()) {
       Serial.write(SerialBT.read());  //juiste waarden!!!!!!
+      value = (SerialBT.read() * 4);
       //myservo.write(SerialBT.read());
-       myservo.write(10);
+       myservo.write(value);
        
-      }
+      }*/
+ Serial.println(Number);
+
+ while (SerialBT.available()) {
+
+  char character = SerialBT.read(); // Receive a single character from the software serial port
+        Data.concat(character); // Add the received character to the receive buffer
+        if (character == '\n')
+        {
+            //Serial.print("Received: ");
+            
+            
+            //Serial.println(Data);
+            Number = Data.toInt() * 10;
+            myservo.write(Number);
+            Serial.println(Number);
+
+            // Add your code to parse the received line here....
+
+            // Clear receive buffer so we're ready to receive the next line
+
+            Data = "";
+            Number = Number;
+            delay(200);
+            
+        }
+   
+
+//Serial.write(SerialBT.read());
+
+
+//value = (Serial.write(SerialBT.read()));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//value = ( value * 9);
+//myservo.write(SerialBT.read() * 9);
+ }
+ 
+//value = 0;
+
+
+
+      
 
      
 
-   if (SerialBT.available()) {
-      //value = SerialBT.read() ;
-      
-      //Serial.println(value); // lees waarden van gsm naar serial monitor
-        if(SerialBT.read()){
-          // myservo.write(180);
-           
-        }
-
-        //Serial.write(SerialBT.read());
-        
-    }
-
-    if (Serial.available()) {
-        
-        SerialBT.write(Serial.read());
-        myservo.write(20);
-        Serial.write(Serial.read());
-        Serial.write(SerialBT.read());
-    }
-
+   
   
 }
