@@ -40,11 +40,50 @@ int value = 0;    // variable to hold the analog value
 
 void setup() {
     Serial.begin(9600);
-    SerialBT.begin(19200);
+    SerialBT.begin(9600);
+
+    SerialBT.print("AT");
+    waitForResponse();
+
+    // Should respond with its version
+SerialBT.print("AT+VERSION");
+waitForResponse();
+
+// Set pin to 1234
+SerialBT.print("AT+PIN1234");
+waitForResponse();
+
+// Set the name to BLU
+SerialBT.print("AT+NAMEBLU");
+waitForResponse();
+
+// Set baudrate from 9600 (default) to 57600
+// * Note of warning * - many people report issues after increasing JY-MCU
+// baud rate upwards from the default 9,600bps rate (e.g. 'AT+BAUD4')
+// so you may want to leave this and not alter the speed!!
+SerialBT.print("AT+BAUD7");
+waitForResponse();
+
+Serial.println("Finished!");
+
    pinMode(13,OUTPUT);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
   myservo.write(20);
 }
+
+
+// Function to pass BlueTooth output through to serial port output
+void waitForResponse() {
+delay(1000);
+while (SerialBT.available()) {
+Serial.write(SerialBT.read());
+}
+Serial.write("\n");
+}
+
+
+
+
 
 void loop() {
   
@@ -60,9 +99,18 @@ void loop() {
   //myservo.write(100);
   value = SerialBT.read() ;
   delay(200);
-  Serial.println((value*18));
+  //Serial.println((value*18));
       
-      myservo.write((value*18));
+      //myservo.write((value*18));
+
+      while (SerialBT.available()) {
+      Serial.write(SerialBT.read());  //juiste waarden!!!!!!
+      //myservo.write(SerialBT.read());
+       myservo.write(10);
+       
+      }
+
+     
 
    if (SerialBT.available()) {
       //value = SerialBT.read() ;
