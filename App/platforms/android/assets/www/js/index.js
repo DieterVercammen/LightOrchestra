@@ -163,7 +163,7 @@ var app = {
         // }
        
         
-        var data = Math.abs(X);
+        var data = X;
 
         
         data += '\n';
@@ -172,7 +172,7 @@ var app = {
         app.displayInTerminal(data, false);
 
         bluetoothSerial.write(data, null, app.showError);
-    },500);
+    },100);
     },
 
     displayInTerminal: function (data, isIncoming) {

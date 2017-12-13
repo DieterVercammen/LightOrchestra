@@ -29,14 +29,11 @@
 #include <Servo.h>
 
 SoftwareSerial SerialBT(2, 3); // RX, TX
-char data = 0; 
+
 String Data = "";
 int Number;
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
-
-int pos = 0;    // variable to store the servo position
-int value = 0;    // variable to hold the analog value
 
 
 void setup() {
@@ -85,20 +82,7 @@ void waitForResponse() {
 void loop() {
   
 
-  /*value = SerialBT.read() ;
-  delay(100);
-  Serial.write(value);
-  //Serial.println((value*18));
-      
-      //myservo.write((value*18));
-
-      while (SerialBT.available()) {
-      Serial.write(SerialBT.read());  //juiste waarden!!!!!!
-      value = (SerialBT.read() * 4);
-      //myservo.write(SerialBT.read());
-       myservo.write(value);
-       
-      }*/
+  
  Serial.println(Number);
 
  while (SerialBT.available()) {
@@ -107,11 +91,81 @@ void loop() {
         Data.concat(character); // Add the received character to the receive buffer
         if (character == '\n')
         {
-            //Serial.print("Received: ");
+            if(Data.toInt() > 0) {
+              Number = 130;
+            } else {
+              Number = 80;
+            }
+          
+            /*switch (Data.toInt()) {
+              case -10:
+                Number = 0;
+                break;
+              case -9:
+                Number = 9;
+                break;
+              case -8:
+                Number = 18;
+                break;
+              case -7:
+                Number = 27;
+                break;
+              case -6:
+                Number = 36;
+                break;
+              case -5:
+                Number = 45;
+                break;
+              case -4:
+                Number = 54;
+                break;
+              case -3:
+                Number = 63;
+                break;
+              case -2:
+                Number = 72;
+                break;
+              case -1:
+                Number = 81;
+                break;
+              case 0:
+                Number = 90;
+                break;
+              case 1:
+                Number = 99;
+                break;
+              case 2:
+                Number = 108;
+                break;
+              case 3:
+                Number = 117;
+                break;
+              case 4:
+                Number = 126;
+                break;
+              case 5:
+                Number = 135;
+                break;
+              case 6:
+                Number = 144;
+                break;
+              case 7:
+                Number = 153;
+                break;
+              case 8:
+                Number = 162;
+                break;
+              case 9:
+                Number = 171;
+                break;
+              case 10:
+                Number = 180;
+                break;
+              default:
+                Number = 0;
+            }*/
+            //Number = Data.toInt() * 19;
             
-            
-            //Serial.println(Data);
-            Number = Data.toInt() * 10;
             myservo.write(Number);
             Serial.println(Number);
 
@@ -121,42 +175,8 @@ void loop() {
 
             Data = "";
             Number = Number;
-            delay(200);
+            delay(100);
             
         }
-   
-
-//Serial.write(SerialBT.read());
-
-
-//value = (Serial.write(SerialBT.read()));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//value = ( value * 9);
-//myservo.write(SerialBT.read() * 9);
  }
- 
-//value = 0;
-
-
-
-      
-
-     
-
-   
-  
 }
