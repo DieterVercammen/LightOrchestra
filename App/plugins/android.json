@@ -33,6 +33,30 @@
     },
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-globalization": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "rocks.loginov.cordova_bluetooth_terminal"
     }
   },
   "dependent_plugins": {}

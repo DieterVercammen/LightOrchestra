@@ -18,7 +18,9 @@
   "license": "MIT",
   "author": "Danila Loginov <danila@loginov.rocks> (https://loginov.rocks)",
   "cordova": {
-    "platforms": [],
+    "platforms": [
+      "android"
+    ],
     "plugins": {
       "cordova-plugin-bluetooth-serial": {},
       "cordova-plugin-whitelist": {},
@@ -27,16 +29,12 @@
       "cordova-plugin-device-orientation": {},
       "cordova-plugin-battery-status": {},
       "cordova-plugin-camera": {},
-      "cordova-plugin-media-capture": {},
       "cordova-plugin-console": {},
       "cordova-plugin-contacts": {},
       "cordova-plugin-dialogs": {},
-      "cordova-plugin-file": {},
-      "cordova-plugin-file-transfer": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-globalization": {},
       "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-media": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-statusbar": {},
@@ -44,6 +42,7 @@
     }
   },
   "dependencies": {
+    "cordova-android": "^6.3.0",
     "cordova-plugin-battery-status": "^1.1.2",
     "cordova-plugin-bluetooth-serial": "^0.4.7",
     "cordova-plugin-camera": "^2.1.1",

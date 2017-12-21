@@ -32,8 +32,10 @@ SoftwareSerial SerialBT(2, 3); // RX, TX
 
 String Data = "";
 int Number;
+int NumberC;
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
+Servo myservoC;
 
 
 void setup() {
@@ -59,14 +61,14 @@ waitForResponse();
 // * Note of warning * - many people report issues after increasing JY-MCU
 // baud rate upwards from the default 9,600bps rate (e.g. 'AT+BAUD4')
 // so you may want to leave this and not alter the speed!!
-SerialBT.print("AT+BAUD7");
+SerialBT.print("AT+BAUD9");
 waitForResponse();
 
 Serial.println("Finished!");
 
    pinMode(13,OUTPUT);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
- 
+  myservoC.attach(6);
 }
 
 
@@ -91,13 +93,19 @@ void loop() {
         Data.concat(character); // Add the received character to the receive buffer
         if (character == '\n')
         {
-            if(Data.toInt() > 0) {
+            /*if(Data.toInt() > 0) {
               Number = 130;
             } else {
               Number = 80;
-            }
+            }*/
           
-            /*switch (Data.toInt()) {
+            switch (Data.toInt()) {
+              case 2000:
+                NumberC = 0;
+                break;
+              case 2001:
+                NumberC = 180;
+                break;
               case -10:
                 Number = 0;
                 break;
@@ -163,10 +171,13 @@ void loop() {
                 break;
               default:
                 Number = 0;
-            }*/
+            }
             //Number = Data.toInt() * 19;
             
             myservo.write(Number);
+            myservoC.write(NumberC);
+            //myservoC.write(90);
+            
             Serial.println(Number);
 
             // Add your code to parse the received line here....
@@ -175,7 +186,9 @@ void loop() {
 
             Data = "";
             Number = Number;
-            delay(100);
+            NumberC = NumberC;
+             Serial.println(NumberC);
+            delay(0);
             
         }
  }

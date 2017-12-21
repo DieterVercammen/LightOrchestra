@@ -143,26 +143,27 @@ var app = {
 
     sendData: function (event) {
         event.preventDefault();
-        //alert($('#terminal form').submit());
+        $('#C').click(function(){
+
+        var chord = 2000;
+        
+        chord += '\n';
+        app.displayInTerminal(chord, false);
+
+        bluetoothSerial.write(chord, null, app.showError);
+        setTimeout(function() {
+            var chord = 2001;
+        
+            chord += '\n';
+            app.displayInTerminal(chord, false);
+    
+            bluetoothSerial.write(chord, null, app.showError);
+        }, 3000);
+        
+        });
+        
         setInterval(function(){
 
-       
-
-        //var $input = $('#terminal form input[name=data]');
-        //var data = $input.val();
-        //$input.val('');
-
-        
-
-        // if( X < 0){
-        //     X = (X * (-1));
-        //    var data = X;
-        // } else {
-        //     X = (X  + 1);
-        //    var data = X;
-        // }
-       
-        
         var data = X;
 
         
