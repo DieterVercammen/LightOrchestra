@@ -1,7 +1,4 @@
-/**
- * Created by Danila Loginov, December 23, 2016
- * https://github.com/1oginov/Cordova-Bluetooth-Terminal
- */
+
 
 'use strict';
 var accelerationX = 0;
@@ -159,21 +156,34 @@ var app = {
     
             bluetoothSerial.write(chord, null, app.showError);
         }, 3000);
-        
+
         });
+        $('#F').click(function(){
+
+            var Fchord = 3000;
+            
+            Fchord += '\n';
+            app.displayInTerminal(Fchord, false);
+    
+            bluetoothSerial.write(Fchord, null, app.showError);
+            setTimeout(function() {
+                var Fchord = 3001;
+            
+                Fchord += '\n';
+                app.displayInTerminal(Fchord, false);
+        
+                bluetoothSerial.write(Fchord, null, app.showError);
+            }, 3000);
+    
+            });
         
         setInterval(function(){
+            var data = X;
+            data += '\n';
+            app.displayInTerminal(data, false);
 
-        var data = X;
-
-        
-        data += '\n';
-       
-
-        app.displayInTerminal(data, false);
-
-        bluetoothSerial.write(data, null, app.showError);
-    },100);
+            bluetoothSerial.write(data, null, app.showError);
+        },100);
     },
 
     displayInTerminal: function (data, isIncoming) {

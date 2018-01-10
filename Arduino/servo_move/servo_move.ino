@@ -33,9 +33,16 @@ SoftwareSerial SerialBT(2, 3); // RX, TX
 String Data = "";
 int Number;
 int NumberC;
+boolean asynchC = false;
+boolean asynchF = false;
+//Servo myservoF;
 Servo myservo;  // create servo object to control a servo
 // twelve servo objects can be created on most boards
 Servo myservoC;
+Servo myservoF;
+//unsigned long previousMillis = 0;        // will store last time LED was updated
+//const long chordsInterval = 2000;           // interval at which to blink (milliseconds)
+
 
 
 void setup() {
@@ -68,7 +75,12 @@ Serial.println("Finished!");
 
    pinMode(13,OUTPUT);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
-  myservoC.attach(6);
+  myservoC.attach(6); // straight up = 110 --> pressing = 20
+  myservoF.attach(5); // straight up = 20 --> pressing = 11
+  myservoC.write(110);
+  myservoF.write(20);
+   
+  
 }
 
 
@@ -77,6 +89,45 @@ void waitForResponse() {
 
 }
 
+void CChord() {
+
+  if (asynchC){
+    
+     myservoC.write(20);
+    
+  }
+   if(!asynchC){
+         myservoC.write(110);
+         
+   }
+    
+  /* unsigned long currentMillis = millis();
+    myservoC.write(130);
+
+  if (currentMillis - previousMillis >= chordsInterval &&  asynchC) {
+    previousMillis = currentMillis;
+    
+    asynchC = false;
+  }
+   if (!asynchC){
+     myservoC.write(50);
+ 
+   }*/
+   
+
+}
+void FChord() {
+
+  if (asynchF){
+     
+     myservoF.write(110);
+  }
+   if(!asynchF){
+        
+         myservoF.write(20);
+
+   }
+}
 
 
 
@@ -84,7 +135,7 @@ void waitForResponse() {
 void loop() {
   
 
-  
+
  Serial.println(Number);
 
  while (SerialBT.available()) {
@@ -93,19 +144,9 @@ void loop() {
         Data.concat(character); // Add the received character to the receive buffer
         if (character == '\n')
         {
-            /*if(Data.toInt() > 0) {
-              Number = 130;
-            } else {
-              Number = 80;
-            }*/
           
             switch (Data.toInt()) {
-              case 2000:
-                NumberC = 0;
-                break;
-              case 2001:
-                NumberC = 180;
-                break;
+            
               case -10:
                 Number = 0;
                 break;
@@ -169,14 +210,31 @@ void loop() {
               case 10:
                 Number = 180;
                 break;
+              case 2000:
+                asynchC = true;
+                break;
+              case 2001:
+               asynchC = false;
+                break;
+              case 3000:
+                asynchF = true;
+                break;
+              case 3001:
+               asynchF = false;
+                break;
               default:
                 Number = 0;
+                //NumberC = 100;
             }
             //Number = Data.toInt() * 19;
             
             myservo.write(Number);
-            myservoC.write(NumberC);
-            //myservoC.write(90);
+            
+          
+           
+              CChord();
+              FChord();
+            
             
             Serial.println(Number);
 
