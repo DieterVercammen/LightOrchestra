@@ -8,9 +8,10 @@
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
     <link rel="stylesheet" type="text/css" href="lib/reset.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/index.css">
 
-    <title>Cordova Bluetooth Terminal</title>
+    <title>Ukulele App</title>
 
 </head>
 <body>
@@ -29,32 +30,61 @@
 
 </div>
 
+<div class="container">
 <div id="terminal" class="state">
 
     <div id="selected-device">
-        <button class="go-back">Back</button>
-        <button id="startAcc">Start Accelerometer</button>
-
-        <span class="name"></span>
-        <span class="address"></span>
-        <span class="status"></span>
-        <div id="accelerometerDiv">
-            <ul class="meter">
-                <li>AccelerationX: <span id="x"> </span></li>
-                <li>X value: <span id="y"> </span></li>
-                <li>accX test: <span id="z"> </span></li>
-            </ul>
-        </div>
-        
-
-        <button id="toggle-connection"></button>
+        <div class="row">
+            <div class="col">
+                <span class="status"></span>
+            </div>
+            <div class="col">
+                <div id="accelerometerDiv">
+                <p>Strum Value: <span id="x"> </span></p>
+                </div>
+            </div>
+            <div class="col">
+                    <button class="btn btn-block" id="toggle-connection"></button>
+            </div>
+        </div>   
     </div>
 
     <div>
-        <label><input type="checkbox" name="autoscroll" value="1" checked> Auto scroll</label>
-        <button id="clear-data">Clear</button>
-        <button id="C">C akkoord</button>
-        <button id="F">F akkoord</button>
+        <div class="row">
+            <div class="col">
+                <label><input class="form-input" type="checkbox" name="autoscroll" value="1" checked> Auto scroll</label>
+            </div>
+            <div class="col">
+                <button class="btn" id="clear-data">Clear</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button id="C" class="btn btn-block btn-chord">C akkoord</button>
+            </div>
+            <div class="col">
+                <button id="F" class="btn btn-block btn-chord">F akkoord</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button id="G" class="btn btn-block btn-chord">G akkoord</button>
+            </div>
+            <div class="col">
+                <button id="D" class="btn btn-block btn-chord">D akkoord</button>
+            </div>
+        </div>
+        
+        
+        
+        
+        <div class="row">
+            <div class="col">
+                <button id="start_strumming" class="btn btn-block">Start Strumming</button>
+                <button id="stop_strumming" class="btn btn-block">Stop Strumming</button>
+            </div>
+        </div>
+
        
     </div>
     
@@ -62,10 +92,11 @@
 
    
     <form>
-        <input type="text" name="data">
-        <input type="submit" name="send" value="Send">
+        
+        <input type="submit" name="send" value="Start" class="btn btn-block">
     </form>
 
+</div>
 </div>
 
 <script type="text/javascript" src="cordova.js"></script>

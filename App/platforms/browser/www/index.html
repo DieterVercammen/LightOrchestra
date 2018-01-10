@@ -33,10 +33,19 @@
 
     <div id="selected-device">
         <button class="go-back">Back</button>
+        <button id="startAcc">Start Accelerometer</button>
 
         <span class="name"></span>
         <span class="address"></span>
         <span class="status"></span>
+        <div id="accelerometerDiv">
+            <ul class="meter">
+                <li>AccelerationX: <span id="x"> </span></li>
+                <li>X value: <span id="y"> </span></li>
+                <li>accX test: <span id="z"> </span></li>
+            </ul>
+        </div>
+        
 
         <button id="toggle-connection"></button>
     </div>
@@ -44,10 +53,15 @@
     <div>
         <label><input type="checkbox" name="autoscroll" value="1" checked> Auto scroll</label>
         <button id="clear-data">Clear</button>
+        <button id="C">C akkoord</button>
+        <button id="F">F akkoord</button>
+        <button id="G">G akkoord</button>
+       
     </div>
-
+    
     <div id="data"></div>
 
+   
     <form>
         <input type="text" name="data">
         <input type="submit" name="send" value="Send">

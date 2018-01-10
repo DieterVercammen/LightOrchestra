@@ -1,34 +1,47 @@
-/**
- * Created by Danila Loginov, December 23, 2016
- * https://github.com/1oginov/Cordova-Bluetooth-Terminal
- */
+
 
 'use strict';
+var accelerationX = 0;
+var accelerationY = 0;
+var accelerationZ = 0;
+var X;
 
 var app = {
 
     initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        this.bindEvents();
     },
+    bindEvents: function() {
+        document.addEventListener('deviceready', app.onDeviceReady, false);
+      },
 
     onDeviceReady: function () {
+        
         app.goTo('paired-devices');
         
 
         bluetoothSerial.isEnabled(app.listPairedDevices, function () {
             app.showError('Enable bluetooth')
         });
-
+        
+        
+       
         $('#refresh-paired-devices').click(app.listPairedDevices);
         $('#paired-devices form').submit(app.selectDevice);
         $('#toggle-connection').click(app.toggleConnection);
         $('#clear-data').click(app.clearData);
+        
         $('#terminal form').submit(app.sendData);
+        $('#startAcc').click(app.startWatch());
 
         $('#terminal .go-back').click(function () {
             app.goTo('paired-devices');
         });
+        app.receivedEvent('deviceready');
+        
     },
+    
 
     listPairedDevices: function () {
         bluetoothSerial.list(function (devices) {
@@ -127,16 +140,68 @@ var app = {
 
     sendData: function (event) {
         event.preventDefault();
+        $('#C').click(function(){
 
-        var $input = $('#terminal form input[name=data]');
-        var data = $input.val();
-        $input.val('');
+        var chord = 2000;
+        
+        chord += '\n';
+        app.displayInTerminal(chord, false);
 
-        data += '\n';
+        bluetoothSerial.write(chord, null, app.showError);
+        setTimeout(function() {
+            var chord = 2001;
+        
+            chord += '\n';
+            app.displayInTerminal(chord, false);
+    
+            bluetoothSerial.write(chord, null, app.showError);
+        }, 3000);
 
-        app.displayInTerminal(data, false);
+        });
+        $('#F').click(function(){
 
-        bluetoothSerial.write(data, null, app.showError);
+            var Fchord = 3000;
+            
+            Fchord += '\n';
+            app.displayInTerminal(Fchord, false);
+    
+            bluetoothSerial.write(Fchord, null, app.showError);
+            setTimeout(function() {
+                var Fchord = 3001;
+            
+                Fchord += '\n';
+                app.displayInTerminal(Fchord, false);
+        
+                bluetoothSerial.write(Fchord, null, app.showError);
+            }, 3000);
+    
+            });
+        $('#G').click(function(){
+
+            var Gchord = 3000;
+            
+            Gchord += '\n';
+            app.displayInTerminal(Gchord, false);
+    
+            bluetoothSerial.write(Gchord, null, app.showError);
+            setTimeout(function() {
+                var Gchord = 3001;
+            
+                Gchord += '\n';
+                app.displayInTerminal(Gchord, false);
+        
+                bluetoothSerial.write(Gchord, null, app.showError);
+            }, 3000);
+    
+        });
+        
+        setInterval(function(){
+            var data = X;
+            data += '\n';
+            app.displayInTerminal(data, false);
+
+            bluetoothSerial.write(data, null, app.showError);
+        },100);
     },
 
     displayInTerminal: function (data, isIncoming) {
@@ -166,9 +231,54 @@ var app = {
     },
 
     showError: function (error) {
-        alert(error);
-    }
+        //alert(error);
+    },
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+    
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+    
+        console.log('Received Event: ' + id);
+        alert("accelorometerevent recieved");
+      },
+    
+      startWatch: function() {
+        // alert("Reloaded");
+        var options = { frequency: 100 };
+        alert("watch started");
+        watchID = navigator.accelerometer.watchAcceleration(app.accelerometerSucces, app.accelerometerError, options);
+        
+      },
+    
+      accelerometerSucces: function(acceleration) {
+        var element = document.getElementById('accelerometerDiv');
+        
+    
+        accelerationX = acceleration.x;
+        accelerationY = acceleration.y;
+        accelerationZ = acceleration.z;
+        var accX = accelerationX.toFixed(0);
+        X = accelerationX.toFixed(0);
+        
+        document.getElementById("x").innerHTML = accelerationX.toFixed(0);
+        document.getElementById("y").innerHTML = X;
+        document.getElementById("z").innerHTML = accX;
+
+        bluetoothSerial.connect(address, app.deviceConnected, function (error) {
+            $('#selected-device .status').text('Disconnected');
+            app.showError(error);
+        });
+    
+      },
+    
+      accelerometerError: function() {
+        alert('onError!');
+      },
 
 };
+
 
 app.initialize();
