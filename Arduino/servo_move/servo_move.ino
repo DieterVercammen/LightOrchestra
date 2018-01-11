@@ -37,6 +37,7 @@ boolean asynchC = false;
 boolean asynchF = false;
 boolean asynchG = false;
 boolean asynchD = false;
+boolean asynchA = false;
 boolean chordDown = false;
 boolean strummingBool = false;
 
@@ -52,6 +53,7 @@ Servo myservoC;
 Servo myservoF;
 Servo myservoG;
 Servo myservoD;
+Servo myservoA;
 //unsigned long previousMillis = 0;        // will store last time LED was updated
 //const long chordsInterval = 2000;           // interval at which to blink (milliseconds)
 
@@ -91,11 +93,13 @@ Serial.println("Finished!");
   myservoC.attach(6); // straight up = 110 --> pressing = 20
   myservoF.attach(5); // straight up = 20 --> pressing = 11
   myservoG.attach(10); // straight up = 50 --> pressing = 180
-  myservoD.attach(11); // straight up = 180 --> pressing 90
+  myservoD.attach(11); // straight up = 180 --> pressing = 90
+  myservoA.attach(7); // straight up = 70 --> pressing = 180
   myservoC.write(110);
   myservoF.write(20);
   myservoG.write(50);
   myservoD.write(190);
+  myservoA.write(70);
   
   
 }
@@ -131,6 +135,7 @@ void FChord() {
   if (asynchF && !chordDown){
      
      myservoF.write(110);
+    
      //chordDown = true;
      
      
@@ -138,6 +143,26 @@ void FChord() {
    if(!asynchF){
         
          myservoF.write(20);
+       
+         //chordDown = false;
+         
+
+   }
+}
+void AChord() {
+
+  if (asynchA && !chordDown){
+     
+     
+     myservoA.write(180);
+     //chordDown = true;
+     
+     
+  }
+   if(!asynchA){
+        
+         
+         myservoA.write(70);
          //chordDown = false;
          
 
@@ -338,6 +363,16 @@ void loop() {
                asynchD = false;
                
                 break;
+              case 6000:
+                asynchA = true;
+                asynchF = true;
+                
+                break;
+              case 6001:
+               asynchA = false;
+               asynchF = false;
+               
+                break;
               case 9000:
                strummingBool = true;
                
@@ -358,12 +393,13 @@ void loop() {
               FChord();
               GChord();
               DChord();
+              AChord();
               if (strummingBool) {
                 strumming();
               } else {
                  myservo.write(Number);
               }
-              if (asynchC || asynchD || asynchF || asynchG)
+              if (asynchC || asynchD || asynchF || asynchG || asynchA)
               {
                 chordDown = true;
               } else {

@@ -6,7 +6,11 @@ var accelerationY = 0;
 var accelerationZ = 0;
 var X;
 $('#stop_strumming').hide();
+$("#start").click(function(){
 
+    $("#start").fadeOut('slow');  
+
+});
 
 var app = {
 
@@ -153,6 +157,7 @@ var app = {
         $('#F').attr("disabled", "disabled");
         $('#G').attr("disabled", "disabled");
         $('#D').attr("disabled", "disabled");
+        $('#A').attr("disabled", "disabled");
 
         bluetoothSerial.write(chord, null, app.showError);
         setTimeout(function() {
@@ -165,6 +170,7 @@ var app = {
             $('#F').removeAttr("disabled");
             $('#G').removeAttr("disabled");
             $('#D').removeAttr("disabled");
+            $('#A').removeAttr("disabled");
 
         }, 1500);
 
@@ -181,6 +187,7 @@ var app = {
             $('#C').attr("disabled", "disabled");
             $('#G').attr("disabled", "disabled");
             $('#D').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
             setTimeout(function() {
                 var Fchord = 3001;
             
@@ -191,10 +198,39 @@ var app = {
                 $('#C').removeAttr("disabled");
                 $('#G').removeAttr("disabled");
                 $('#D').removeAttr("disabled");
+                $('#A').removeAttr("disabled");
             }, 
         1500);
     
             });
+            $('#A').click(function(){
+
+                var Achord = 6000;
+                
+                Achord += '\n';
+                app.displayInTerminal(Achord, false);
+        
+                bluetoothSerial.write(Achord, null, app.showError);
+    
+                $('#C').attr("disabled", "disabled");
+                $('#G').attr("disabled", "disabled");
+                $('#D').attr("disabled", "disabled");
+                $('#F').attr("disabled", "disabled");
+                setTimeout(function() {
+                    var Achord = 6001;
+                
+                    Achord += '\n';
+                    app.displayInTerminal(Achord, false);
+            
+                    bluetoothSerial.write(Achord, null, app.showError);
+                    $('#C').removeAttr("disabled");
+                    $('#G').removeAttr("disabled");
+                    $('#D').removeAttr("disabled");
+                    $('#F').removeAttr("disabled");
+                }, 
+            1500);
+        
+                });
         $('#G').click(function(){
 
             var Gchord = 4000;
@@ -206,6 +242,7 @@ var app = {
             $('#C').attr("disabled", "disabled");
             $('#F').attr("disabled", "disabled");
             $('#D').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
             setTimeout(function() {
                 var Gchord = 4001;
             
@@ -216,6 +253,7 @@ var app = {
                 $('#C').removeAttr("disabled");
                 $('#F').removeAttr("disabled");
                 $('#D').removeAttr("disabled");
+                $('#A').removeAttr("disabled");
             }, 1500);
     
         });
@@ -230,6 +268,7 @@ var app = {
             $('#C').attr("disabled", "disabled");
             $('#F').attr("disabled", "disabled");
             $('#G').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
             setTimeout(function() {
                 var Dchord = 5001;
             
@@ -240,6 +279,7 @@ var app = {
                 $('#C').removeAttr("disabled");
                 $('#F').removeAttr("disabled");
                 $('#G').removeAttr("disabled");
+                $('#A').removeAttr("disabled");
             }, 1500);
     
         });
@@ -302,7 +342,7 @@ var app = {
     },
 
     showError: function (error) {
-        //alert(error);
+        alert(error);
     },
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);

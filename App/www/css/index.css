@@ -23,9 +23,21 @@ button, input, textarea {
 }
 .btn {
     margin:5px;
+    border-radius: 20px;
+    border: 2px solid #17298d;
+    background-color: #b7c9ff;
 }
 .btn-chord  {
     height:90px;
+    background-color: #ffffff;
+    border: 2px solid #17288e;
+    border-radius: 10px;
+}
+#data {
+    display: none;
+}
+.hide {
+    display: none;
 }
 .state {
     position: absolute;
@@ -39,6 +51,7 @@ button, input, textarea {
     align-items: stretch;
     overflow: auto;
 }
+
 
 .state > * {
     padding: .5em 1em;

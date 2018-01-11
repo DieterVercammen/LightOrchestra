@@ -36,6 +36,11 @@
     <div id="selected-device">
         <div class="row">
             <div class="col">
+                <h1 class="text-center">Ukulele App</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <span class="status"></span>
             </div>
             <div class="col">
@@ -50,12 +55,12 @@
     </div>
 
     <div>
-        <div class="row">
+        <div class="row hide">
             <div class="col">
                 <label><input class="form-input" type="checkbox" name="autoscroll" value="1" checked> Auto scroll</label>
             </div>
             <div class="col">
-                <button class="btn" id="clear-data">Clear</button>
+                <button class="btn btn-block" id="clear-data">Clear</button>
             </div>
         </div>
         <div class="row">
@@ -63,7 +68,7 @@
                 <button id="C" class="btn btn-block btn-chord">C akkoord</button>
             </div>
             <div class="col">
-                <button id="F" class="btn btn-block btn-chord">F akkoord</button>
+                <button id="F" class="btn btn-block btn-chord">A akkoord</button>
             </div>
         </div>
         <div class="row">
@@ -74,6 +79,11 @@
                 <button id="D" class="btn btn-block btn-chord">D akkoord</button>
             </div>
         </div>
+        <div class="row">
+                <div class="col">
+                    <button id="A" class="btn btn-block btn-chord">F akkoord</button>
+                </div>
+            </div>
         
         
         
@@ -90,11 +100,12 @@
     
     <div id="data"></div>
 
+  
+        <form>
+            <input type="submit" name="send" value="Start" class="btn btn-block">
+        </form> 
+  
    
-    <form>
-        
-        <input type="submit" name="send" value="Start" class="btn btn-block">
-    </form>
 
 </div>
 </div>
