@@ -75,6 +75,8 @@
 >  Buttons disable als ander akkoord ingedrukt is.
 >   
 >   Fine tuning hardware
+> 
+> Added readme log
 
 
 
