@@ -22,8 +22,8 @@ boolean chordDown = false;
 boolean strummingBool = false;
 
 int strumstate = LOW; 
-long LeftTime = 200;           
-long RightTime = 200;
+long LeftTime = 450;           
+long RightTime = 450;
 
 
 
@@ -67,7 +67,7 @@ Serial.println("Finished!");
   myservoC.attach(6); // straight up = 110 --> pressing = 20
   myservoF.attach(5); // straight up = 20 --> pressing = 11
   myservoG.attach(10); // straight up = 50 --> pressing = 180
-  myservoD.attach(11); // straight up = 180 --> pressing = 90
+  myservoD.attach(11); // straight up = 180 --> pressing = 50
   myservoA.attach(7); // straight up = 70 --> pressing = 180
   myservoC.write(110);
   myservoF.write(20);
@@ -126,7 +126,7 @@ void GChord() {
 
   if (asynchG && !chordDown){
      
-     myservoG.write(180);
+     myservoG.write(190);
     
   }
    if(!asynchG){
@@ -139,7 +139,7 @@ void DChord() {
 
   if (asynchD && !chordDown){
      
-     myservoD.write(90);
+     myservoD.write(50);
      
   }
    if(!asynchD){
