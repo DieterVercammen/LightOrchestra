@@ -1,23 +1,3 @@
-/* Sweep
- by BARRAGAN <http://barraganstudio.com>
- This example code is in the public domain.
-
- modified 8 Nov 2013
- by Scott Fitzgerald
- http://www.arduino.cc/en/Tutorial/Sweep
-*/
-
-/* Bluetooth (HC-05) to Arduino Uno wiring:
- * VCC - 5V
- * RX  - 3
- * TX  - 2
- * GND - GND
- */
- /*
-  * Yellow - xxx
-  * Red - 5V
-  * Brown - GDN
-  */
 
 #define PC_BAUDRATE 115200
 #define BLUETOOTH_BAUDRATE 38400
@@ -46,16 +26,14 @@ long LeftTime = 300;
 long RightTime = 300;
 
 
-//Servo myservoF;
-Servo myservo;  // create servo object to control a servo
-// twelve servo objects can be created on most boards
+
+Servo myservo;  
 Servo myservoC;
 Servo myservoF;
 Servo myservoG;
 Servo myservoD;
 Servo myservoA;
-//unsigned long previousMillis = 0;        // will store last time LED was updated
-//const long chordsInterval = 2000;           // interval at which to blink (milliseconds)
+
 
 unsigned long previousMillis = 0;        
 const long interval = 1000; 
@@ -67,22 +45,18 @@ void setup() {
     SerialBT.print("AT");
     waitForResponse();
 
-    // Should respond with its version
+    
 SerialBT.print("AT+VERSION");
 waitForResponse();
 
-// Set pin to 1234
+
 SerialBT.print("AT+PIN1234");
 waitForResponse();
 
-// Set the name to BLU
+
 SerialBT.print("AT+NAMEBLU");
 waitForResponse();
 
-// Set baudrate from 9600 (default) to 57600
-// * Note of warning * - many people report issues after increasing JY-MCU
-// baud rate upwards from the default 9,600bps rate (e.g. 'AT+BAUD4')
-// so you may want to leave this and not alter the speed!!
 SerialBT.print("AT+BAUD9");
 waitForResponse();
 
@@ -104,8 +78,6 @@ Serial.println("Finished!");
   
 }
 
-
-// Function to pass BlueTooth output through to serial port output
 void waitForResponse() {
 
 }
@@ -115,19 +87,13 @@ void CChord() {
   if (asynchC && !chordDown){
      
      myservoC.write(20);
-     //chordDown = true;
      
-     
-    
   }
    if(!asynchC){
-         myservoC.write(110);
-         //chordDown = false;
-        
-         
+    
+     myservoC.write(110);
          
    }
-
 
 }
 void FChord() {
@@ -135,37 +101,25 @@ void FChord() {
   if (asynchF && !chordDown){
      
      myservoF.write(110);
-    
-     //chordDown = true;
-     
      
   }
    if(!asynchF){
         
-         myservoF.write(20);
-       
-         //chordDown = false;
+     myservoF.write(20);
          
-
    }
 }
 void AChord() {
 
   if (asynchA && !chordDown){
      
-     
      myservoA.write(180);
-     //chordDown = true;
-     
      
   }
    if(!asynchA){
-        
          
-         myservoA.write(70);
-         //chordDown = false;
-         
-
+     myservoA.write(70);
+     
    }
 }
 void GChord() {
@@ -173,14 +127,11 @@ void GChord() {
   if (asynchG && !chordDown){
      
      myservoG.write(180);
-     //chordDown = true;
     
   }
    if(!asynchG){
         
-         myservoG.write(50);
-         //chordDown = false;
-         
+     myservoG.write(50);
 
    }
 }
@@ -189,14 +140,11 @@ void DChord() {
   if (asynchD && !chordDown){
      
      myservoD.write(90);
-     //chordDown = true;
      
   }
    if(!asynchD){
         
-         myservoD.write(180);
-         //chordDown = false;
-         
+     myservoD.write(180);
 
    }
 }
@@ -217,17 +165,6 @@ if((strumstate == HIGH) && (currentMillis - previousMillis >= LeftTime))
     previousMillis = currentMillis;  
     myservo.write(150);       
   }
-
-
-  
-  /*if (currentMillis - previousMillis >= interval) {
-      previousMillis = currentMillis; 
-      
-  } 
-  if (currentMillis2 - previousMillis >= interval) {
-      previousMillis = currentMillis2;
-      //myservo.write(180);
-  }*/
 }
 
 
@@ -235,14 +172,12 @@ if((strumstate == HIGH) && (currentMillis - previousMillis >= LeftTime))
 
 void loop() {
   
-
-
  Serial.println(Number);
 
  while (SerialBT.available()) {
 
-  char character = SerialBT.read(); // Receive a single character from the software serial port
-        Data.concat(character); // Add the received character to the receive buffer
+  char character = SerialBT.read(); 
+        Data.concat(character); 
         if (character == '\n')
         {
           
@@ -383,12 +318,8 @@ void loop() {
                 break;
               default:
                 break;
-                //NumberC = 100;
             }
            
-            
-             
-            
               CChord();
               FChord();
               GChord();
@@ -399,24 +330,16 @@ void loop() {
               } else {
                  myservo.write(Number);
               }
-              if (asynchC || asynchD || asynchF || asynchG || asynchA)
-              {
+              if (asynchC || asynchD || asynchF || asynchG || asynchA) {
                 chordDown = true;
               } else {
                 chordDown = false;
               }
               
-            
-            Serial.println(Number);
-
-            // Add your code to parse the received line here....
-
-            // Clear receive buffer so we're ready to receive the next line
-
             Data = "";
             Number = Number;
             NumberC = NumberC;
-             Serial.println(NumberC);
+            Serial.println(NumberC);
             delay(0);
             
         }
