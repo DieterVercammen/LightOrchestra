@@ -22,8 +22,8 @@ boolean chordDown = false;
 boolean strummingBool = false;
 
 int strumstate = LOW; 
-long LeftTime = 300;           
-long RightTime = 300;
+long LeftTime = 200;           
+long RightTime = 200;
 
 
 
@@ -36,7 +36,7 @@ Servo myservoA;
 
 
 unsigned long previousMillis = 0;        
-const long interval = 1000; 
+const long interval = 500; 
 
 void setup() {
     Serial.begin(9600);
