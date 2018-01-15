@@ -147,35 +147,35 @@ var app = {
 
     sendData: function (event) {
         event.preventDefault();
-        $('#C').click(function(){
+        $('#C').on('vmousedown', function(){
 
-        var chord = 2000;
-        
-        chord += '\n';
-        app.displayInTerminal(chord, false);
-
-        $('#F').attr("disabled", "disabled");
-        $('#G').attr("disabled", "disabled");
-        $('#D').attr("disabled", "disabled");
-        $('#A').attr("disabled", "disabled");
-
-        bluetoothSerial.write(chord, null, app.showError);
-        setTimeout(function() {
-            var chord = 2001;
-        
+            var chord = 2000;
+            
             chord += '\n';
             app.displayInTerminal(chord, false);
-    
+
+            $('#F').attr("disabled", "disabled");
+            $('#G').attr("disabled", "disabled");
+            $('#D').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
+
             bluetoothSerial.write(chord, null, app.showError);
-            $('#F').removeAttr("disabled");
-            $('#G').removeAttr("disabled");
-            $('#D').removeAttr("disabled");
-            $('#A').removeAttr("disabled");
 
-        }, 1500);
-
-        });
-        $('#F').click(function(){
+            });
+        $('#C').on('vmouseup', function(){
+                var chord = 2001;
+            
+                chord += '\n';
+                app.displayInTerminal(chord, false);
+        
+                bluetoothSerial.write(chord, null, app.showError);
+                $('#F').removeAttr("disabled");
+                $('#G').removeAttr("disabled");
+                $('#D').removeAttr("disabled");
+                $('#A').removeAttr("disabled");
+    
+            });
+        $('#F').on('vmousedown', function(){
 
             var Fchord = 3000;
             
@@ -188,22 +188,26 @@ var app = {
             $('#G').attr("disabled", "disabled");
             $('#D').attr("disabled", "disabled");
             $('#A').attr("disabled", "disabled");
-            setTimeout(function() {
-                var Fchord = 3001;
             
-                Fchord += '\n';
-                app.displayInTerminal(Fchord, false);
-        
-                bluetoothSerial.write(Fchord, null, app.showError);
-                $('#C').removeAttr("disabled");
-                $('#G').removeAttr("disabled");
-                $('#D').removeAttr("disabled");
-                $('#A').removeAttr("disabled");
-            }, 
-        1500);
     
             });
-            $('#A').click(function(){
+            $('#F').on('vmouseup', function(){
+
+            
+                    var Fchord = 3001;
+                
+                    Fchord += '\n';
+                    app.displayInTerminal(Fchord, false);
+            
+                    bluetoothSerial.write(Fchord, null, app.showError);
+                    $('#C').removeAttr("disabled");
+                    $('#G').removeAttr("disabled");
+                    $('#D').removeAttr("disabled");
+                    $('#A').removeAttr("disabled");
+              
+        
+                });
+            $('#A').on('vmousedown', function(){
 
                 var Achord = 6000;
                 
@@ -216,7 +220,9 @@ var app = {
                 $('#G').attr("disabled", "disabled");
                 $('#D').attr("disabled", "disabled");
                 $('#F').attr("disabled", "disabled");
-                setTimeout(function() {
+        
+                });
+            $('#A').on('vmouseup', function(){
                     var Achord = 6001;
                 
                     Achord += '\n';
@@ -227,11 +233,10 @@ var app = {
                     $('#G').removeAttr("disabled");
                     $('#D').removeAttr("disabled");
                     $('#F').removeAttr("disabled");
-                }, 
-            1500);
+                
         
                 });
-        $('#G').click(function(){
+        $('#G').on('vmousedown', function(){
 
             var Gchord = 4000;
             
@@ -243,9 +248,10 @@ var app = {
             $('#F').attr("disabled", "disabled");
             $('#D').attr("disabled", "disabled");
             $('#A').attr("disabled", "disabled");
-            setTimeout(function() {
-                var Gchord = 4001;
-            
+    
+        });
+        $('#G').on('vmouseup', function(){
+                var Gchord = 4001; 
                 Gchord += '\n';
                 app.displayInTerminal(Gchord, false);
         
@@ -254,10 +260,9 @@ var app = {
                 $('#F').removeAttr("disabled");
                 $('#D').removeAttr("disabled");
                 $('#A').removeAttr("disabled");
-            }, 1500);
-    
+          
         });
-        $('#D').click(function(){
+        $('#D').on('vmousedown', function(){
 
             var Dchord = 5000;
             
@@ -269,7 +274,12 @@ var app = {
             $('#F').attr("disabled", "disabled");
             $('#G').attr("disabled", "disabled");
             $('#A').attr("disabled", "disabled");
-            setTimeout(function() {
+           
+    
+        });
+        $('#D').on('vmouseup', function(){
+
+           
                 var Dchord = 5001;
             
                 Dchord += '\n';
@@ -280,7 +290,7 @@ var app = {
                 $('#F').removeAttr("disabled");
                 $('#G').removeAttr("disabled");
                 $('#A').removeAttr("disabled");
-            }, 1500);
+           
     
         });
         $('#start_strumming').click(function(){

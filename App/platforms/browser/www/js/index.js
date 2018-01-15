@@ -5,6 +5,12 @@ var accelerationX = 0;
 var accelerationY = 0;
 var accelerationZ = 0;
 var X;
+$('#stop_strumming').hide();
+$("#start").click(function(){
+
+    $("#start").fadeOut('slow');  
+
+});
 
 var app = {
 
@@ -39,6 +45,7 @@ var app = {
             app.goTo('paired-devices');
         });
         app.receivedEvent('deviceready');
+        
         
     },
     
@@ -140,25 +147,35 @@ var app = {
 
     sendData: function (event) {
         event.preventDefault();
-        $('#C').click(function(){
+        $('#C').on('vmousedown', function(){
 
-        var chord = 2000;
-        
-        chord += '\n';
-        app.displayInTerminal(chord, false);
-
-        bluetoothSerial.write(chord, null, app.showError);
-        setTimeout(function() {
-            var chord = 2001;
-        
+            var chord = 2000;
+            
             chord += '\n';
             app.displayInTerminal(chord, false);
-    
-            bluetoothSerial.write(chord, null, app.showError);
-        }, 3000);
 
-        });
-        $('#F').click(function(){
+            $('#F').attr("disabled", "disabled");
+            $('#G').attr("disabled", "disabled");
+            $('#D').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
+
+            bluetoothSerial.write(chord, null, app.showError);
+
+            });
+        $('#C').on('vmouseup', function(){
+                var chord = 2001;
+            
+                chord += '\n';
+                app.displayInTerminal(chord, false);
+        
+                bluetoothSerial.write(chord, null, app.showError);
+                $('#F').removeAttr("disabled");
+                $('#G').removeAttr("disabled");
+                $('#D').removeAttr("disabled");
+                $('#A').removeAttr("disabled");
+    
+            });
+        $('#F').on('vmousedown', function(){
 
             var Fchord = 3000;
             
@@ -166,32 +183,136 @@ var app = {
             app.displayInTerminal(Fchord, false);
     
             bluetoothSerial.write(Fchord, null, app.showError);
-            setTimeout(function() {
-                var Fchord = 3001;
+
+            $('#C').attr("disabled", "disabled");
+            $('#G').attr("disabled", "disabled");
+            $('#D').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
             
-                Fchord += '\n';
-                app.displayInTerminal(Fchord, false);
-        
-                bluetoothSerial.write(Fchord, null, app.showError);
-            }, 3000);
     
             });
-        $('#G').click(function(){
+            $('#F').on('vmouseup', function(){
 
-            var Gchord = 3000;
+            
+                    var Fchord = 3001;
+                
+                    Fchord += '\n';
+                    app.displayInTerminal(Fchord, false);
+            
+                    bluetoothSerial.write(Fchord, null, app.showError);
+                    $('#C').removeAttr("disabled");
+                    $('#G').removeAttr("disabled");
+                    $('#D').removeAttr("disabled");
+                    $('#A').removeAttr("disabled");
+              
+        
+                });
+            $('#A').on('vmousedown', function(){
+
+                var Achord = 6000;
+                
+                Achord += '\n';
+                app.displayInTerminal(Achord, false);
+        
+                bluetoothSerial.write(Achord, null, app.showError);
+    
+                $('#C').attr("disabled", "disabled");
+                $('#G').attr("disabled", "disabled");
+                $('#D').attr("disabled", "disabled");
+                $('#F').attr("disabled", "disabled");
+        
+                });
+            $('#A').on('vmouseup', function(){
+                    var Achord = 6001;
+                
+                    Achord += '\n';
+                    app.displayInTerminal(Achord, false);
+            
+                    bluetoothSerial.write(Achord, null, app.showError);
+                    $('#C').removeAttr("disabled");
+                    $('#G').removeAttr("disabled");
+                    $('#D').removeAttr("disabled");
+                    $('#F').removeAttr("disabled");
+                
+        
+                });
+        $('#G').on('vmousedown', function(){
+
+            var Gchord = 4000;
             
             Gchord += '\n';
             app.displayInTerminal(Gchord, false);
     
             bluetoothSerial.write(Gchord, null, app.showError);
-            setTimeout(function() {
-                var Gchord = 3001;
-            
+            $('#C').attr("disabled", "disabled");
+            $('#F').attr("disabled", "disabled");
+            $('#D').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
+    
+        });
+        $('#G').on('vmouseup', function(){
+                var Gchord = 4001; 
                 Gchord += '\n';
                 app.displayInTerminal(Gchord, false);
         
                 bluetoothSerial.write(Gchord, null, app.showError);
-            }, 3000);
+                $('#C').removeAttr("disabled");
+                $('#F').removeAttr("disabled");
+                $('#D').removeAttr("disabled");
+                $('#A').removeAttr("disabled");
+          
+        });
+        $('#D').on('vmousedown', function(){
+
+            var Dchord = 5000;
+            
+            Dchord += '\n';
+            app.displayInTerminal(Dchord, false);
+    
+            bluetoothSerial.write(Dchord, null, app.showError);
+            $('#C').attr("disabled", "disabled");
+            $('#F').attr("disabled", "disabled");
+            $('#G').attr("disabled", "disabled");
+            $('#A').attr("disabled", "disabled");
+           
+    
+        });
+        $('#D').on('vmouseup', function(){
+
+           
+                var Dchord = 5001;
+            
+                Dchord += '\n';
+                app.displayInTerminal(Dchord, false);
+        
+                bluetoothSerial.write(Dchord, null, app.showError);
+                $('#C').removeAttr("disabled");
+                $('#F').removeAttr("disabled");
+                $('#G').removeAttr("disabled");
+                $('#A').removeAttr("disabled");
+           
+    
+        });
+        $('#start_strumming').click(function(){
+            $('#stop_strumming').show();
+            $('#start_strumming').hide();
+            var start = 9000;
+            
+            start += '\n';
+            app.displayInTerminal(start, false);
+    
+            bluetoothSerial.write(start, null, app.showError);
+    
+        });
+        $('#stop_strumming').click(function(){
+            $('#stop_strumming').hide();
+            $('#start_strumming').show();
+            var start = 9001;
+            
+            start += '\n';
+            app.displayInTerminal(start, false);
+    
+            bluetoothSerial.write(start, null, app.showError);
     
         });
         
@@ -231,7 +352,7 @@ var app = {
     },
 
     showError: function (error) {
-        //alert(error);
+        alert(error);
     },
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
@@ -242,13 +363,13 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
     
         console.log('Received Event: ' + id);
-        alert("accelorometerevent recieved");
+       
       },
     
       startWatch: function() {
-        // alert("Reloaded");
+        
         var options = { frequency: 100 };
-        alert("watch started");
+        
         watchID = navigator.accelerometer.watchAcceleration(app.accelerometerSucces, app.accelerometerError, options);
         
       },

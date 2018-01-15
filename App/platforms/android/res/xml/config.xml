@@ -51,8 +51,8 @@
     <feature name="BluetoothSerial">
         <param name="android-package" value="com.megster.cordova.BluetoothSerial" />
     </feature>
-    <name>Cordova Bluetooth Terminal</name>
-    <description>Simple app for communication with devices via bluetooth</description>
+    <name>Ukulele App</name>
+    <description>Play ukulele through bluetoot</description>
     <author email="danila@loginov.rocks" href="https://loginov.rocks">Danila Loginov</author>
     <content src="index.html" />
     <access origin="*" />

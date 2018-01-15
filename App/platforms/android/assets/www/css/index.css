@@ -107,3 +107,9 @@ button, input, textarea {
 #terminal form input[type=text] {
     min-width: 0;
 }
+.ui-loader {
+    display: none;
+}
+.start::before{
+    content:'';
+}
