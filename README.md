@@ -76,7 +76,9 @@
 >   
 >   Fine tuning hardware
 > 
-> Added readme log
+> Toegevoegd readme log
+> 
+> Toegevoegd powerpoint
 
 
 
